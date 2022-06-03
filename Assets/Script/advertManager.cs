@@ -77,9 +77,7 @@ public class advertManager : MonoBehaviour
             new BannerView(adUnitId_50, adaptedSize, 0,-1360);
         
         // bannerView_50 =
-        //     new BannerView(adUnitId_50, AdSize.Banner, 0, 50);
-        // bannerView_50 =
-        //     new BannerView(adUnitId_50, AdSize.SmartBanner, AdPosition.Bottom);
+        //     new BannerView(adUnitId_50, AdSize.Banner, 0, 50);        
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
