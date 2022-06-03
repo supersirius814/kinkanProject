@@ -1,0 +1,11 @@
+framework module RakutenRewardSDK {
+  umbrella header "RakutenRewardSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module RakutenRewardSDK.Swift {
+    header "RakutenRewardSDK-Swift.h"
+    requires objc
+}

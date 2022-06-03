@@ -1,0 +1,23 @@
+# Reward SDK
+-keepattributes *Annotation*
+-keepattributes Signature
+-keep class jp.co.rakuten.reward.rewardsdk.api.** {
+  public <fields>;
+  public <methods>;
+}
+
+-keep public enum jp.co.rakuten.reward.rewardsdk.api.status.** {
+  **[] $VALUES;
+  public *;
+}
+
+-keep class jp.co.rakuten.reward.rewardsdk.unity.** {
+    public <fields>;
+    public <methods>;
+}
+
+# Picasso
+-dontwarn com.squareup.okhttp.**
+
+# If there is not Google Play Service
+-dontwarn jp.co.rakuten.reward.rewardsdk.**

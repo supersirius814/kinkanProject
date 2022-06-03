@@ -1,0 +1,741 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=unchecked -O -module-name RakutenRewardSDK
+import AdSupport
+import CoreTelephony
+import Foundation
+@_exported import RakutenRewardSDK
+import Swift
+import SystemConfiguration
+import UIKit
+import WebKit
+import os.log
+import os
+@available(iOS 11, *)
+public typealias RakutenADBannerView = RakutenRewardSDK.RewardAdbannerView
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 11, *)
+@objc(RakutenADBannerView) public class RewardAdbannerView : RakutenRewardSDK.RakutenAdView {
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc public func load()
+  @objc public func load(AdSize: RakutenRewardSDK.RAdSize)
+  @objc override dynamic public func didMoveToSuperview()
+  @objc deinit
+}
+@objc public protocol RakutenRewardSessionDelegate {
+  @objc optional func didFinishSignIn()
+  @objc optional func didFailSignIn(error: RakutenRewardSDK.RewardSessionErrorCode)
+  @objc optional func didFinishSignOut()
+  @objc optional func didFailSignOut(error: RakutenRewardSDK.RewardSessionErrorCode)
+  @objc optional func didFailCancelSignOut(error: RakutenRewardSDK.RewardSessionErrorCode)
+  @objc optional func didFailCancelSignIn(error: RakutenRewardSDK.RewardSessionErrorCode)
+}
+@_hasMissingDesignatedInitializers public class IOSVersion {
+  @objc deinit
+}
+@objc public enum RewardSessionErrorCode : Swift.Int {
+  case AppCodeInvalid = 1001
+  case MemberInfoError = 1002
+  case SDKStatusError = 1003
+  case RequestError = 1004
+  case ProcessParameterError = 1005
+  case MemberInfoSpecialError = 1006
+  case Unknown = 9999
+  case JSError = 2001
+  case logOutDidHappenOnServer = 2002
+  case logInDidHappenOnServer = 2003
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc final public class RakutenRewardAds : ObjectiveC.NSObject {
+  @objc public static let sharedInstance: RakutenRewardSDK.RakutenRewardAds
+  @available(*, deprecated, message: "Use RewardConfiguration.isDebug")
+  @objc final public var isDebug: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc final public func initialize(appCode: Swift.String)
+  @objc final public func getAppCode() -> Swift.String?
+  @objc final public func getVersion() -> Swift.String
+  @objc deinit
+}
+@objc public enum RWFrequency : Swift.Int {
+  case OncePerDay
+  case Per5Minutes
+  case None
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RWReachabilityError : Swift.Error {
+  case FailedToCreateWithAddress(Darwin.sockaddr_in)
+  case FailedToCreateWithHostname(Swift.String)
+  case UnableToSetCallback
+  case UnableToSetDispatchQueue
+}
+public let RWReachabilityChangedNotification: Foundation.NSNotification.Name
+public class RWReachability {
+  public typealias NetworkReachable = (RakutenRewardSDK.RWReachability) -> ()
+  public typealias NetworkUnreachable = (RakutenRewardSDK.RWReachability) -> ()
+  public enum NetworkStatus : Swift.CustomStringConvertible {
+    case notReachable, reachableViaWiFi, reachableViaWWAN
+    public var description: Swift.String {
+      get
+    }
+    public static func == (a: RakutenRewardSDK.RWReachability.NetworkStatus, b: RakutenRewardSDK.RWReachability.NetworkStatus) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public var whenReachable: RakutenRewardSDK.RWReachability.NetworkReachable?
+  public var whenUnreachable: RakutenRewardSDK.RWReachability.NetworkUnreachable?
+  public var reachableOnWWAN: Swift.Bool
+  public var notificationCenter: Foundation.NotificationCenter
+  public var currentReachabilityString: Swift.String {
+    get
+  }
+  public var currentReachabilityStatus: RakutenRewardSDK.RWReachability.NetworkStatus {
+    get
+  }
+  required public init(reachabilityRef: SystemConfiguration.SCNetworkReachability)
+  convenience public init?(hostname: Swift.String)
+  convenience public init?()
+  @objc deinit
+}
+extension RWReachability {
+  public func startNotifier() throws
+  public func stopNotifier()
+  public var isReachable: Swift.Bool {
+    get
+  }
+  public var isReachableViaWWAN: Swift.Bool {
+    get
+  }
+  public var isReachableViaWiFi: Swift.Bool {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 11, *)
+public class RewardPortalButton : UIKit.UIView {
+  @objc public enum ColorType : Swift.Int {
+    case Light
+    case Dark
+    public typealias RawValue = Swift.Int
+    public init?(rawValue: Swift.Int)
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc public enum BadgePosition : Swift.Int {
+    case TopLeft
+    case TopRight
+    case BottomLeft
+    case BottomRight
+    case Center
+    case Custom
+    public typealias RawValue = Swift.Int
+    public init?(rawValue: Swift.Int)
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc @IBOutlet weak public var portalButton: UIKit.UIButton!
+  @objc override dynamic public func awakeFromNib()
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func layoutSubviews()
+  @objc public var colorType: RakutenRewardSDK.RewardPortalButton.ColorType {
+    @objc get
+    @objc set
+  }
+  @objc public var badgePosition: RakutenRewardSDK.RewardPortalButton.BadgePosition {
+    @objc get
+    @objc set
+  }
+  @objc public var badgePositionPoint: CoreGraphics.CGPoint {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 11, *)
+public class RewardPortalBarButtonItem : UIKit.UIBarButtonItem {
+  final public let portalButton: RakutenRewardSDK.RewardPortalButton
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc(RakutenADInterstitialDelegate) public protocol RewardAdInterstitialDelegate {
+  @objc func interstitialDidReceiveAd(ad: RakutenRewardSDK.RewardAdInterstitial)
+  @objc func interstitialDidFailToReceiveAd(ad: RakutenRewardSDK.RewardAdInterstitial, message: Swift.String, code: RakutenRewardSDK.RADErrorCode)
+  @objc optional func interstitialWillPresentScreen(ad: RakutenRewardSDK.RewardAdInterstitial)
+  @objc optional func interstitialWillDismissScreen(ad: RakutenRewardSDK.RewardAdInterstitial)
+  @objc optional func interstitialDidDismissScreen(ad: RakutenRewardSDK.RewardAdInterstitial)
+  @objc optional func interstitialWillLeaveApplication(ad: RakutenRewardSDK.RewardAdInterstitial)
+}
+public typealias RakutenADInterstitialDelegate = RakutenRewardSDK.RewardAdInterstitialDelegate
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc final public class RewardConfiguration : ObjectiveC.NSObject {
+  @objc public static var enableManualLocationPermissionRequest: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public static var isDebug: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public static var isUserSettingUIEnabled: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+public typealias RakutenADInterstitial = RakutenRewardSDK.RewardAdInterstitial
+@_inheritsConvenienceInitializers @objc(RakutenADInterstitial) public class RewardAdInterstitial : UIKit.UIViewController {
+  @objc public var locationId: Swift.String
+  @objc weak public var rootViewController: UIKit.UIViewController?
+  @objc weak public var delegate: RakutenRewardSDK.RewardAdInterstitialDelegate?
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @objc public func loadAd(_ showing: Swift.Bool = false)
+  @objc public func showAd()
+  @objc override dynamic public var shouldAutorotate: Swift.Bool {
+    @objc get
+  }
+  @objc override dynamic public var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @objc get
+  }
+  @objc public static func instantiate() -> RakutenRewardSDK.RakutenADInterstitial
+  @objc deinit
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+@_inheritsConvenienceInitializers @available(iOS 11, *)
+@objc public class RakutenAdView : UIKit.UIView {
+  @objc public var adSize: RakutenRewardSDK.RAdSize {
+    @objc get
+    @objc set
+  }
+  @objc public var keyword: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var locationId: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc weak public var delegate: RakutenRewardSDK.RewardADBannerViewDelegate?
+  @objc override dynamic public func awakeFromNib()
+  @objc override dynamic public func updateConstraints()
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc public protocol RakutenRewardDelegate {
+  @objc optional func didSDKStateChange(_ status: RakutenRewardSDK.RakutenRewardStatus)
+  @objc optional func didUpdateUnclaimedAchievement(_ missionAchievement: RakutenRewardSDK.MissionAchievementData)
+  @objc optional func didUpdateUser(_ user: RakutenRewardSDK.User)
+}
+@_hasMissingDesignatedInitializers open class SwKeyStore {
+  public enum SecError : Darwin.OSStatus, Swift.Error {
+    case unimplemented
+    case param
+    case allocate
+    case notAvailable
+    case authFailed
+    case duplicateItem
+    case itemNotFound
+    case interactionNotAllowed
+    case decode
+    case missingEntitlement
+    public static var debugLevel: Swift.Int
+    public typealias RawValue = Darwin.OSStatus
+    public init?(rawValue: Darwin.OSStatus)
+    public var rawValue: Darwin.OSStatus {
+      get
+    }
+  }
+  open class func upsertKey(_ pemKey: Swift.String, keyTag: Swift.String, options: [Foundation.NSString : Swift.AnyObject] = [:]) throws
+  open class func getKey(_ keyTag: Swift.String) throws -> Swift.String
+  open class func delKey(_ keyTag: Swift.String) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class SwKeyConvert {
+  public enum SwError : Swift.Error {
+    case invalidKey
+    case badPassphrase
+    case keyNotEncrypted
+    public static var debugLevel: Swift.Int
+    public static func == (a: RakutenRewardSDK.SwKeyConvert.SwError, b: RakutenRewardSDK.SwKeyConvert.SwError) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  @_hasMissingDesignatedInitializers open class PrivateKey {
+    open class func pemToPKCS1DER(_ pemKey: Swift.String) throws -> Foundation.Data
+    open class func derToPKCS1PEM(_ derKey: Foundation.Data) -> Swift.String
+    public typealias EncMode = RakutenRewardSDK.PEM.EncryptedPrivateKey.EncMode
+    open class func encryptPEM(_ pemKey: Swift.String, passphrase: Swift.String, mode: RakutenRewardSDK.SwKeyConvert.PrivateKey.EncMode) throws -> Swift.String
+    open class func decryptPEM(_ pemKey: Swift.String, passphrase: Swift.String) throws -> Swift.String
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class PublicKey {
+    open class func pemToPKCS1DER(_ pemKey: Swift.String) throws -> Foundation.Data
+    open class func derToPKCS1PEM(_ derKey: Foundation.Data) -> Swift.String
+    open class func derToPKCS8PEM(_ derKey: Foundation.Data) -> Swift.String
+    @objc deinit
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class PKCS8 {
+  @_hasMissingDesignatedInitializers open class PrivateKey {
+    open class func getPKCS1DEROffset(_ derKey: Foundation.Data) -> Swift.Int?
+    open class func stripHeaderIfAny(_ derKey: Foundation.Data) -> Foundation.Data?
+    open class func hasCorrectHeader(_ derKey: Foundation.Data) -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class PublicKey {
+    open class func addHeader(_ derKey: Foundation.Data) -> Foundation.Data
+    open class func getPKCS1DEROffset(_ derKey: Foundation.Data) -> Swift.Int?
+    open class func stripHeaderIfAny(_ derKey: Foundation.Data) -> Foundation.Data?
+    open class func hasCorrectHeader(_ derKey: Foundation.Data) -> Swift.Bool
+    @objc deinit
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class PEM {
+  public enum SwError : Swift.Error {
+    case parse(Swift.String)
+    case badPassphrase
+    case keyNotEncrypted
+    public static var debugLevel: Swift.Int
+  }
+  @_hasMissingDesignatedInitializers open class PrivateKey {
+    open class func toDER(_ pemKey: Swift.String) throws -> Foundation.Data
+    open class func toPEM(_ derKey: Foundation.Data) -> Swift.String
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class PublicKey {
+    open class func toDER(_ pemKey: Swift.String) throws -> Foundation.Data
+    open class func toPEM(_ derKey: Foundation.Data) -> Swift.String
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class EncryptedPrivateKey {
+    public enum EncMode {
+      case aes128CBC, aes256CBC
+      public static func == (a: RakutenRewardSDK.PEM.EncryptedPrivateKey.EncMode, b: RakutenRewardSDK.PEM.EncryptedPrivateKey.EncMode) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+    open class func toDER(_ pemKey: Swift.String, passphrase: Swift.String) throws -> Foundation.Data
+    open class func toPEM(_ derKey: Foundation.Data, passphrase: Swift.String, mode: RakutenRewardSDK.PEM.EncryptedPrivateKey.EncMode) -> Swift.String
+    @objc deinit
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class CC {
+  public typealias CCCryptorStatus = Swift.Int32
+  public enum CCError : RakutenRewardSDK.CC.CCCryptorStatus, Swift.Error {
+    case paramError
+    case bufferTooSmall
+    case memoryFailure
+    case alignmentError
+    case decodeError
+    case unimplemented
+    case overflow
+    case rngFailure
+    public static var debugLevel: Swift.Int
+    public typealias RawValue = RakutenRewardSDK.CC.CCCryptorStatus
+    public init?(rawValue: RakutenRewardSDK.CC.CCCryptorStatus)
+    public var rawValue: RakutenRewardSDK.CC.CCCryptorStatus {
+      get
+    }
+  }
+  open class func generateRandom(_ size: Swift.Int) -> Foundation.Data
+  public typealias CCDigestAlgorithm = Swift.UInt32
+  public enum DigestAlgorithm : RakutenRewardSDK.CC.CCDigestAlgorithm {
+    case none
+    case md5
+    case rmd128, rmd160, rmd256, rmd320
+    case sha1
+    case sha224, sha256, sha384, sha512
+    public typealias RawValue = RakutenRewardSDK.CC.CCDigestAlgorithm
+    public init?(rawValue: RakutenRewardSDK.CC.CCDigestAlgorithm)
+    public var rawValue: RakutenRewardSDK.CC.CCDigestAlgorithm {
+      get
+    }
+  }
+  open class func digest(_ data: Foundation.Data, alg: RakutenRewardSDK.CC.DigestAlgorithm) -> Foundation.Data
+  public typealias CCHmacAlgorithm = Swift.UInt32
+  public enum HMACAlg : RakutenRewardSDK.CC.CCHmacAlgorithm {
+    case sha1, md5, sha256, sha384, sha512, sha224
+    public typealias RawValue = RakutenRewardSDK.CC.CCHmacAlgorithm
+    public init?(rawValue: RakutenRewardSDK.CC.CCHmacAlgorithm)
+    public var rawValue: RakutenRewardSDK.CC.CCHmacAlgorithm {
+      get
+    }
+  }
+  open class func HMAC(_ data: Foundation.Data, alg: RakutenRewardSDK.CC.HMACAlg, key: Foundation.Data) -> Foundation.Data
+  public typealias CCOperation = Swift.UInt32
+  public enum OpMode : RakutenRewardSDK.CC.CCOperation {
+    case encrypt, decrypt
+    public typealias RawValue = RakutenRewardSDK.CC.CCOperation
+    public init?(rawValue: RakutenRewardSDK.CC.CCOperation)
+    public var rawValue: RakutenRewardSDK.CC.CCOperation {
+      get
+    }
+  }
+  public typealias CCMode = Swift.UInt32
+  public enum BlockMode : RakutenRewardSDK.CC.CCMode {
+    case ecb, cbc, cfb, ctr, f8, lrw, ofb, xts, rc4, cfb8
+    public typealias RawValue = RakutenRewardSDK.CC.CCMode
+    public init?(rawValue: RakutenRewardSDK.CC.CCMode)
+    public var rawValue: RakutenRewardSDK.CC.CCMode {
+      get
+    }
+  }
+  public enum AuthBlockMode : RakutenRewardSDK.CC.CCMode {
+    case gcm, ccm
+    public typealias RawValue = RakutenRewardSDK.CC.CCMode
+    public init?(rawValue: RakutenRewardSDK.CC.CCMode)
+    public var rawValue: RakutenRewardSDK.CC.CCMode {
+      get
+    }
+  }
+  public typealias CCAlgorithm = Swift.UInt32
+  public enum Algorithm : RakutenRewardSDK.CC.CCAlgorithm {
+    case aes, des, threeDES, cast, rc4, rc2, blowfish
+    public typealias RawValue = RakutenRewardSDK.CC.CCAlgorithm
+    public init?(rawValue: RakutenRewardSDK.CC.CCAlgorithm)
+    public var rawValue: RakutenRewardSDK.CC.CCAlgorithm {
+      get
+    }
+  }
+  public typealias CCPadding = Swift.UInt32
+  public enum Padding : RakutenRewardSDK.CC.CCPadding {
+    case noPadding, pkcs7Padding
+    public typealias RawValue = RakutenRewardSDK.CC.CCPadding
+    public init?(rawValue: RakutenRewardSDK.CC.CCPadding)
+    public var rawValue: RakutenRewardSDK.CC.CCPadding {
+      get
+    }
+  }
+  open class func crypt(_ opMode: RakutenRewardSDK.CC.OpMode, blockMode: RakutenRewardSDK.CC.BlockMode, algorithm: RakutenRewardSDK.CC.Algorithm, padding: RakutenRewardSDK.CC.Padding, data: Foundation.Data, key: Foundation.Data, iv: Foundation.Data) throws -> Foundation.Data
+  open class func cryptAuth(_ opMode: RakutenRewardSDK.CC.OpMode, blockMode: RakutenRewardSDK.CC.AuthBlockMode, algorithm: RakutenRewardSDK.CC.Algorithm, data: Foundation.Data, aData: Foundation.Data, key: Foundation.Data, iv: Foundation.Data, tagLength: Swift.Int) throws -> Foundation.Data
+  open class func digestAvailable() -> Swift.Bool
+  open class func randomAvailable() -> Swift.Bool
+  open class func hmacAvailable() -> Swift.Bool
+  open class func cryptorAvailable() -> Swift.Bool
+  open class func available() -> Swift.Bool
+  @_hasMissingDesignatedInitializers open class GCM {
+    open class func crypt(_ opMode: RakutenRewardSDK.CC.OpMode, algorithm: RakutenRewardSDK.CC.Algorithm, data: Foundation.Data, key: Foundation.Data, iv: Foundation.Data, aData: Foundation.Data, tagLength: Swift.Int) throws -> (Foundation.Data, Foundation.Data)
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class CCM {
+    open class func crypt(_ opMode: RakutenRewardSDK.CC.OpMode, algorithm: RakutenRewardSDK.CC.Algorithm, data: Foundation.Data, key: Foundation.Data, iv: Foundation.Data, aData: Foundation.Data, tagLength: Swift.Int) throws -> (Foundation.Data, Foundation.Data)
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class RSA {
+    public typealias CCAsymmetricPadding = Swift.UInt32
+    public enum AsymmetricPadding : RakutenRewardSDK.CC.RSA.CCAsymmetricPadding {
+      case pkcs1
+      case oaep
+      public typealias RawValue = RakutenRewardSDK.CC.RSA.CCAsymmetricPadding
+      public init?(rawValue: RakutenRewardSDK.CC.RSA.CCAsymmetricPadding)
+      public var rawValue: RakutenRewardSDK.CC.RSA.CCAsymmetricPadding {
+        get
+      }
+    }
+    public enum AsymmetricSAPadding : Swift.UInt32 {
+      case pkcs15
+      case pss
+      public typealias RawValue = Swift.UInt32
+      public init?(rawValue: Swift.UInt32)
+      public var rawValue: Swift.UInt32 {
+        get
+      }
+    }
+    open class func generateKeyPair(_ keySize: Swift.Int = 4096) throws -> (Foundation.Data, Foundation.Data)
+    open class func encrypt(_ data: Foundation.Data, derKey: Foundation.Data, tag: Foundation.Data, padding: RakutenRewardSDK.CC.RSA.AsymmetricPadding, digest: RakutenRewardSDK.CC.DigestAlgorithm) throws -> Foundation.Data
+    open class func decrypt(_ data: Foundation.Data, derKey: Foundation.Data, tag: Foundation.Data, padding: RakutenRewardSDK.CC.RSA.AsymmetricPadding, digest: RakutenRewardSDK.CC.DigestAlgorithm) throws -> (Foundation.Data, Swift.Int)
+    open class func sign(_ message: Foundation.Data, derKey: Foundation.Data, padding: RakutenRewardSDK.CC.RSA.AsymmetricSAPadding, digest: RakutenRewardSDK.CC.DigestAlgorithm, saltLen: Swift.Int) throws -> Foundation.Data
+    open class func verify(_ message: Foundation.Data, derKey: Foundation.Data, padding: RakutenRewardSDK.CC.RSA.AsymmetricSAPadding, digest: RakutenRewardSDK.CC.DigestAlgorithm, saltLen: Swift.Int, signedData: Foundation.Data) throws -> Swift.Bool
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class DH {
+    public enum DHParam {
+      case rfc3526Group5
+      public static func == (a: RakutenRewardSDK.CC.DH.DHParam, b: RakutenRewardSDK.CC.DH.DHParam) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+    open class DH {
+      public init(dhParam: RakutenRewardSDK.CC.DH.DHParam) throws
+      open func generateKey() throws -> Foundation.Data
+      open func computeKey(_ peerKey: Foundation.Data) throws -> Foundation.Data
+      @objc deinit
+    }
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class EC {
+    open class func generateKeyPair(_ keySize: Swift.Int) throws -> (Foundation.Data, Foundation.Data)
+    open class func signHash(_ privateKey: Foundation.Data, hash: Foundation.Data) throws -> Foundation.Data
+    open class func verifyHash(_ publicKey: Foundation.Data, hash: Foundation.Data, signedData: Foundation.Data) throws -> Swift.Bool
+    open class func computeSharedSecret(_ privateKey: Foundation.Data, publicKey: Foundation.Data) throws -> Foundation.Data
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class CRC {
+    public typealias CNcrc = Swift.UInt32
+    public enum Mode : RakutenRewardSDK.CC.CRC.CNcrc {
+      case crc8, crc8ICODE, crc8ITU, crc8ROHC, crc8WCDMA, crc16, crc16CCITTTrue, crc16CCITTFalse, crc16USB, crc16XMODEM, crc16DECTR, crc16DECTX, crc16ICODE, crc16VERIFONE, crc16A, crc16B, crc16Fletcher, crc32Adler, crc32, crc32CASTAGNOLI, crc32BZIP2, crc32MPEG2, crc32POSIX, crc32XFER, crc64ECMA182
+      public typealias RawValue = RakutenRewardSDK.CC.CRC.CNcrc
+      public init?(rawValue: RakutenRewardSDK.CC.CRC.CNcrc)
+      public var rawValue: RakutenRewardSDK.CC.CRC.CNcrc {
+        get
+      }
+    }
+    open class func crc(_ input: Foundation.Data, mode: RakutenRewardSDK.CC.CRC.Mode) throws -> Swift.UInt64
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class CMAC {
+    open class func AESCMAC(_ data: Foundation.Data, key: Foundation.Data) -> Foundation.Data
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class KeyDerivation {
+    public typealias CCPseudoRandomAlgorithm = Swift.UInt32
+    public enum PRFAlg : RakutenRewardSDK.CC.KeyDerivation.CCPseudoRandomAlgorithm {
+      case sha1, sha224, sha256, sha384, sha512
+      public typealias RawValue = RakutenRewardSDK.CC.KeyDerivation.CCPseudoRandomAlgorithm
+      public init?(rawValue: RakutenRewardSDK.CC.KeyDerivation.CCPseudoRandomAlgorithm)
+      public var rawValue: RakutenRewardSDK.CC.KeyDerivation.CCPseudoRandomAlgorithm {
+        get
+      }
+    }
+    open class func PBKDF2(_ password: Swift.String, salt: Foundation.Data, prf: RakutenRewardSDK.CC.KeyDerivation.PRFAlg, rounds: Swift.UInt32) throws -> Foundation.Data
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @_hasMissingDesignatedInitializers open class KeyWrap {
+    public static let rfc3394IV: Foundation.Data
+    open class func SymmetricKeyWrap(_ iv: Foundation.Data, kek: Foundation.Data, rawKey: Foundation.Data) throws -> Foundation.Data
+    open class func SymmetricKeyUnwrap(_ iv: Foundation.Data, kek: Foundation.Data, wrappedKey: Foundation.Data) throws -> Foundation.Data
+    open class func available() -> Swift.Bool
+    @objc deinit
+  }
+  @objc deinit
+}
+extension Data {
+  public func hexadecimalString() -> Swift.String
+  public func arrayOfBytes() -> [Swift.UInt8]
+}
+extension String {
+  public func dataFromHexadecimalString() -> Foundation.Data?
+}
+@objc public enum RADErrorCode : Swift.Int {
+  case NetworkError = 1001
+  case NoAvailableAd = 1002
+  case NoCouponError = 1003
+  case DFPError = 1004
+  case Unknown = 9999
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum RAdSize : Swift.Int, Swift.CustomStringConvertible {
+  case Banner
+  case Large
+  case Rectangle
+  case FullScreen
+  public var description: Swift.String {
+    get
+  }
+  public var size: CoreGraphics.CGSize {
+    get
+  }
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum MemberInfoSpecialError : Swift.Error {
+  case badRequest
+  public static func == (a: RakutenRewardSDK.MemberInfoSpecialError, b: RakutenRewardSDK.MemberInfoSpecialError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_inheritsConvenienceInitializers @objc public class MissionAchievementData : ObjectiveC.NSObject {
+  @available(iOS 11, *)
+  @objc public func claim()
+  @objc public func getAction() -> Swift.String?
+  @objc public func getInstruction() -> Swift.String?
+  @objc public func getIconUrl() -> Swift.String?
+  @objc public func getNotificationType() -> Swift.String?
+  @objc public func getName() -> Swift.String?
+  @objc public func getAchievedDate() -> Foundation.Date?
+  @objc public func getPoint() -> Foundation.NSNumber?
+  @objc public func isCustom() -> Swift.Bool
+  @objc public func setAction(action: Swift.String)
+  @objc public func setAchievedDateStr(achievedDateStr: Swift.String?)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum RakutenRewardStatus : Swift.Int {
+  case Online
+  case Offline
+  case AppCodeInvalid
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc final public class RakutenReward : ObjectiveC.NSObject {
+  @objc public static let sharedInstance: RakutenRewardSDK.RakutenReward
+  @objc weak final public var delegate: RakutenRewardSDK.RakutenRewardDelegate?
+  @objc final public var isDebug: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  final public var advertisingID: Swift.String?
+  @objc final public func startSession(appCode: Swift.String)
+  @available(iOS 11, *)
+  @objc final public func logAction(actionCode: Swift.String)
+  @available(iOS 11, *)
+  @objc final public func openPortal()
+  @available(iOS 11, *)
+  @objc final public func openSignin()
+  @available(iOS 11, *)
+  @objc final public func doSignIn(username: Swift.String, password: Swift.String, delegate: RakutenRewardSDK.RakutenRewardSessionDelegate?)
+  @available(iOS 11, *)
+  @objc final public func cancelSignIn()
+  @available(iOS 11, *)
+  @objc final public func doSignOut(delegate: RakutenRewardSDK.RakutenRewardSessionDelegate?)
+  @available(iOS 11, *)
+  @objc final public func cancelSignOut()
+  @objc final public func addBlacklistUrl(urlSet: Swift.Set<Swift.String>)
+  @objc final public func updateMissionList()
+  @objc final public func getAppCode() -> Swift.String?
+  @objc final public func getStatus() -> RakutenRewardSDK.RakutenRewardStatus
+  @objc final public func getUser() -> RakutenRewardSDK.User?
+  @objc final public func getVersion() -> Swift.String
+  @objc final public func isOptedOut() -> Swift.Bool
+  @objc final public func isUIEnabled() -> Swift.Bool
+  @objc final public func setUIEnabled(enabled: Swift.Bool)
+  @objc final public func didUpdateLocation(longitude: Swift.Double, latitude: Swift.Double, timeStamp: Foundation.Date)
+  @objc deinit
+}
+@available(iOS 11, *)
+@objc(RakutenADBannerViewDelegate) public protocol RewardADBannerViewDelegate {
+  @objc func didReceiveAd(bannerView: RakutenRewardSDK.RewardAdbannerView)
+  @objc func didFailToReceiveAd(bannerView: RakutenRewardSDK.RewardAdbannerView, message: Swift.String, code: RakutenRewardSDK.RADErrorCode)
+  @objc optional func didClickAd(bannerView: RakutenRewardSDK.RakutenAdView)
+}
+@available(iOS 11, *)
+public typealias RakutenADBannerViewDelegate = RakutenRewardSDK.RewardADBannerViewDelegate
+@_inheritsConvenienceInitializers @objc public class User : ObjectiveC.NSObject {
+  public func isEqual(object: Swift.AnyObject?) -> Swift.Bool
+  @objc public func isSignin() -> Swift.Bool
+  @objc public func getUnclaimed() -> Swift.Int
+  @objc public func getPoint() -> Swift.Int
+  @objc public func getAchievementsList() -> Swift.Array<RakutenRewardSDK.MissionAchievementData>?
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension RakutenRewardSDK.RewardSessionErrorCode : Swift.Equatable {}
+extension RakutenRewardSDK.RewardSessionErrorCode : Swift.Hashable {}
+extension RakutenRewardSDK.RewardSessionErrorCode : Swift.RawRepresentable {}
+extension RakutenRewardSDK.RWFrequency : Swift.Equatable {}
+extension RakutenRewardSDK.RWFrequency : Swift.Hashable {}
+extension RakutenRewardSDK.RWFrequency : Swift.RawRepresentable {}
+extension RakutenRewardSDK.RWReachability.NetworkStatus : Swift.Equatable {}
+extension RakutenRewardSDK.RWReachability.NetworkStatus : Swift.Hashable {}
+@available(iOS 11, *)
+extension RakutenRewardSDK.RewardPortalButton.ColorType : Swift.Equatable {}
+@available(iOS 11, *)
+extension RakutenRewardSDK.RewardPortalButton.ColorType : Swift.Hashable {}
+@available(iOS 11, *)
+extension RakutenRewardSDK.RewardPortalButton.ColorType : Swift.RawRepresentable {}
+@available(iOS 11, *)
+extension RakutenRewardSDK.RewardPortalButton.BadgePosition : Swift.Equatable {}
+@available(iOS 11, *)
+extension RakutenRewardSDK.RewardPortalButton.BadgePosition : Swift.Hashable {}
+@available(iOS 11, *)
+extension RakutenRewardSDK.RewardPortalButton.BadgePosition : Swift.RawRepresentable {}
+extension RakutenRewardSDK.SwKeyStore.SecError : Swift.Equatable {}
+extension RakutenRewardSDK.SwKeyStore.SecError : Swift.Hashable {}
+extension RakutenRewardSDK.SwKeyStore.SecError : Swift.RawRepresentable {}
+extension RakutenRewardSDK.SwKeyConvert.SwError : Swift.Equatable {}
+extension RakutenRewardSDK.SwKeyConvert.SwError : Swift.Hashable {}
+extension RakutenRewardSDK.PEM.EncryptedPrivateKey.EncMode : Swift.Equatable {}
+extension RakutenRewardSDK.PEM.EncryptedPrivateKey.EncMode : Swift.Hashable {}
+extension RakutenRewardSDK.CC.CCError : Swift.Equatable {}
+extension RakutenRewardSDK.CC.CCError : Swift.Hashable {}
+extension RakutenRewardSDK.CC.CCError : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.DigestAlgorithm : Swift.Equatable {}
+extension RakutenRewardSDK.CC.DigestAlgorithm : Swift.Hashable {}
+extension RakutenRewardSDK.CC.DigestAlgorithm : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.HMACAlg : Swift.Equatable {}
+extension RakutenRewardSDK.CC.HMACAlg : Swift.Hashable {}
+extension RakutenRewardSDK.CC.HMACAlg : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.OpMode : Swift.Equatable {}
+extension RakutenRewardSDK.CC.OpMode : Swift.Hashable {}
+extension RakutenRewardSDK.CC.OpMode : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.BlockMode : Swift.Equatable {}
+extension RakutenRewardSDK.CC.BlockMode : Swift.Hashable {}
+extension RakutenRewardSDK.CC.BlockMode : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.AuthBlockMode : Swift.Equatable {}
+extension RakutenRewardSDK.CC.AuthBlockMode : Swift.Hashable {}
+extension RakutenRewardSDK.CC.AuthBlockMode : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.Algorithm : Swift.Equatable {}
+extension RakutenRewardSDK.CC.Algorithm : Swift.Hashable {}
+extension RakutenRewardSDK.CC.Algorithm : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.Padding : Swift.Equatable {}
+extension RakutenRewardSDK.CC.Padding : Swift.Hashable {}
+extension RakutenRewardSDK.CC.Padding : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.RSA.AsymmetricPadding : Swift.Equatable {}
+extension RakutenRewardSDK.CC.RSA.AsymmetricPadding : Swift.Hashable {}
+extension RakutenRewardSDK.CC.RSA.AsymmetricPadding : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.RSA.AsymmetricSAPadding : Swift.Equatable {}
+extension RakutenRewardSDK.CC.RSA.AsymmetricSAPadding : Swift.Hashable {}
+extension RakutenRewardSDK.CC.RSA.AsymmetricSAPadding : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.DH.DHParam : Swift.Equatable {}
+extension RakutenRewardSDK.CC.DH.DHParam : Swift.Hashable {}
+extension RakutenRewardSDK.CC.CRC.Mode : Swift.Equatable {}
+extension RakutenRewardSDK.CC.CRC.Mode : Swift.Hashable {}
+extension RakutenRewardSDK.CC.CRC.Mode : Swift.RawRepresentable {}
+extension RakutenRewardSDK.CC.KeyDerivation.PRFAlg : Swift.Equatable {}
+extension RakutenRewardSDK.CC.KeyDerivation.PRFAlg : Swift.Hashable {}
+extension RakutenRewardSDK.CC.KeyDerivation.PRFAlg : Swift.RawRepresentable {}
+extension RakutenRewardSDK.RADErrorCode : Swift.Equatable {}
+extension RakutenRewardSDK.RADErrorCode : Swift.Hashable {}
+extension RakutenRewardSDK.RADErrorCode : Swift.RawRepresentable {}
+extension RakutenRewardSDK.RAdSize : Swift.Equatable {}
+extension RakutenRewardSDK.RAdSize : Swift.Hashable {}
+extension RakutenRewardSDK.RAdSize : Swift.RawRepresentable {}
+extension RakutenRewardSDK.MemberInfoSpecialError : Swift.Equatable {}
+extension RakutenRewardSDK.MemberInfoSpecialError : Swift.Hashable {}
+extension RakutenRewardSDK.RakutenRewardStatus : Swift.Equatable {}
+extension RakutenRewardSDK.RakutenRewardStatus : Swift.Hashable {}
+extension RakutenRewardSDK.RakutenRewardStatus : Swift.RawRepresentable {}
